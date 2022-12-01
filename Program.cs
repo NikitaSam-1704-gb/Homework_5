@@ -140,7 +140,7 @@ Write(" Введите число поиск которого будет осу�
 int chislo=Convert.ToInt32(ReadLine());
 NumberSearch(massiv, chislo);*/
 
-// Задайте одномерный массив из 123 случайных чисел. Найдите количество элементов массива, значения которых лежат в отрезке [10,99].
+/*// Задайте одномерный массив из 123 случайных чисел. Найдите количество элементов массива, значения которых лежат в отрезке [10,99].
 //Пример для массива из 5, а не 123 элементов. В своём решении сделайте для 123
 //[5, 18, 123, 6, 2] -> 1
 //[1, 2, 3, 6, 2] -> 0
@@ -192,4 +192,65 @@ int[] massiv=FillArrayRamdom(123, 0, 123);
 PrintArray(massiv);
 //Write(" Введите число поиск которого будет осуществляться в массиве ");
 int chislo=CountElementsInterval(massiv, 10, 99);
-WriteLine($" Число элементов массива в интервале [10,99] равно {chislo}");
+WriteLine($" Число элементов массива в интервале [10,99] равно {chislo}");*/
+
+
+//Найдите произведение пар чисел в одномерном массиве. 
+//Парой считаем первый и последний элемент, второй и предпоследний и т.д. Результат запишите в новом массиве.
+//[1 2 3 4 5] -> 5 8 3
+//[6 7 3 6] -> 36 21
+
+using static System.Console;
+Clear();
+
+(int number, int minValues, int maxValues) ParametersRandomArray()
+{
+    (int number, int minValues, int maxValues) parameters;
+    Write(" Введите размер массива  ");
+    parameters.number=Convert.ToInt32(ReadLine());
+    Write(" Введите минимальное Значение ");
+    parameters.minValues=Convert.ToInt32(ReadLine());
+    Write(" Введите максимальное Значение ");
+    parameters.maxValues=Convert.ToInt32(ReadLine());
+    return parameters;
+}
+
+int [] FillArrayRamdom(int number, int minValues, int maxValues)
+{
+    int[] array=new int[number];
+    for(int i=0; i<array.Length; i++)
+        array[i]=new Random().Next(minValues,maxValues+1);
+    return array;
+}
+
+void PrintArray(int[] array)
+{
+  WriteLine(String.Join(" ", array));  
+}
+
+int [] task37(int[] array)
+{
+    int size;
+    if(array.Length%2==0)
+         size=(array.Length/2);
+    else
+        size=(array.Length/2+1);
+    int [] sumArray= new int[size];
+    
+    for(int i=0; i<size; i++)
+    {
+        if(i!=array.Length-1-i)
+            sumArray[i]=array[i]*array[array.Length-1-i];
+        else
+            sumArray[i]=array[i]; 
+    }
+    return sumArray;
+}
+
+(int number, int minValues, int maxValues) parametersWork=ParametersRandomArray();
+int[] massiv=FillArrayRamdom(parametersWork.number, parametersWork.minValues, parametersWork.maxValues);
+PrintArray(massiv);
+int[] sumMassiv=task37(massiv);
+PrintArray(sumMassiv);
+
+
