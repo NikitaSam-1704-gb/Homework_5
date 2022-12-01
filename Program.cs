@@ -36,7 +36,7 @@ int[] massiv=FillArrayRamdom(12, -9, 9);
 SumPositiveNegativElements(massiv);*/
 
 
- //Напишите программу замена элементов массива: положительные элементы замените на соответствующие отрицательные, и наоборот.
+ /*//Напишите программу замена элементов массива: положительные элементы замените на соответствующие отрицательные, и наоборот.
 // [-4, -8, 8, 2] -> [4, 8, -8, -2]
 
 using static System.Console;
@@ -80,5 +80,63 @@ int[] ArrayMirrorElements( int [] array)
 int[] massiv=FillArrayRamdom(parametersWork.number, parametersWork.minValues, parametersWork.maxValues);
 PrintArray(massiv);
 int[] massivMirror=ArrayMirrorElements(massiv);
-PrintArray(massivMirror);
+PrintArray(massivMirror);*/
+
+// Задайте массив. Напишите программу, которая определяет, присутствует ли заданное число в массиве.
+//4; массив [6, 7, 19, 345, 3] -> нет
+//3; массив [6, 7, 19, 345, 3] -> да
+
+
+using static System.Console;
+Clear();
+
+(int number, int minValues, int maxValues) ParametersRandomArray()
+{
+    (int number, int minValues, int maxValues) parameters;
+    Write(" Введите размер массива  ");
+    parameters.number=Convert.ToInt32(ReadLine());
+    Write(" Введите минимальное Значение ");
+    parameters.minValues=Convert.ToInt32(ReadLine());
+    Write(" Введите максимальное Значение ");
+    parameters.maxValues=Convert.ToInt32(ReadLine());
+    return parameters;
+}
+
+int [] FillArrayRamdom(int number, int minValues, int maxValues)
+{
+    int[] array=new int[number];
+    for(int i=0; i<array.Length; i++)
+        array[i]=new Random().Next(minValues,maxValues+1);
+    return array;
+}
+
+void PrintArray(int[] array)
+{
+  WriteLine(String.Join(" ", array));  
+}
+
+
+void NumberSearch( int [] array, int number)
+{
+    bool flag=false;
+    for(int i=0; i<array.Length; i++)
+    {
+        if(array[i]== number)
+        {
+            flag=true;
+            break;
+        }
+    }
+    if(flag==true)
+        WriteLine(" -> да, данное число есть в массиве ");
+    else
+        WriteLine(" -> нет, данного числа нет в массиве ");    
+}
+
+(int number, int minValues, int maxValues) parametersWork=ParametersRandomArray();
+int[] massiv=FillArrayRamdom(parametersWork.number, parametersWork.minValues, parametersWork.maxValues);
+PrintArray(massiv);
+Write(" Введите число поиск которого будет осуществляться в массиве ");
+int chislo=Convert.ToInt32(ReadLine());
+NumberSearch(massiv, chislo);
 
