@@ -82,7 +82,7 @@ PrintArray(massiv);
 int[] massivMirror=ArrayMirrorElements(massiv);
 PrintArray(massivMirror);*/
 
-// Задайте массив. Напишите программу, которая определяет, присутствует ли заданное число в массиве.
+/*// Задайте массив. Напишите программу, которая определяет, присутствует ли заданное число в массиве.
 //4; массив [6, 7, 19, 345, 3] -> нет
 //3; массив [6, 7, 19, 345, 3] -> да
 
@@ -138,5 +138,58 @@ int[] massiv=FillArrayRamdom(parametersWork.number, parametersWork.minValues, pa
 PrintArray(massiv);
 Write(" Введите число поиск которого будет осуществляться в массиве ");
 int chislo=Convert.ToInt32(ReadLine());
-NumberSearch(massiv, chislo);
+NumberSearch(massiv, chislo);*/
 
+// Задайте одномерный массив из 123 случайных чисел. Найдите количество элементов массива, значения которых лежат в отрезке [10,99].
+//Пример для массива из 5, а не 123 элементов. В своём решении сделайте для 123
+//[5, 18, 123, 6, 2] -> 1
+//[1, 2, 3, 6, 2] -> 0
+//[10, 11, 12, 13, 14] -> 5
+
+using static System.Console;
+Clear();
+
+(int number, int minValues, int maxValues) ParametersRandomArray()
+{
+    (int number, int minValues, int maxValues) parameters;
+    Write(" Введите размер массива  ");
+    parameters.number=Convert.ToInt32(ReadLine());
+    Write(" Введите минимальное Значение ");
+    parameters.minValues=Convert.ToInt32(ReadLine());
+    Write(" Введите максимальное Значение ");
+    parameters.maxValues=Convert.ToInt32(ReadLine());
+    return parameters;
+}
+
+int [] FillArrayRamdom(int number, int minValues, int maxValues)
+{
+    int[] array=new int[number];
+    for(int i=0; i<array.Length; i++)
+        array[i]=new Random().Next(minValues,maxValues+1);
+    return array;
+}
+
+void PrintArray(int[] array)
+{
+  WriteLine(String.Join(" ", array));  
+}
+
+
+int CountElementsInterval( int [] array, int minValues, int maxValues)
+{
+    int count=0;
+    for(int i=0; i<array.Length; i++)
+    {
+        if(minValues<=array[i] && array[i]<=maxValues)
+            count++;
+    }
+    return count;   
+}
+
+//(int number, int minValues, int maxValues) parametersWork=ParametersRandomArray();
+
+int[] massiv=FillArrayRamdom(123, 0, 123);
+PrintArray(massiv);
+//Write(" Введите число поиск которого будет осуществляться в массиве ");
+int chislo=CountElementsInterval(massiv, 10, 99);
+WriteLine($" Число элементов массива в интервале [10,99] равно {chislo}");
