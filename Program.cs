@@ -254,7 +254,7 @@ int[] sumMassiv=task37(massiv);
 PrintArray(sumMassiv);*/
 
 
-///Задайте массив заполненный случайными положительными трёхзначными числами. Напишите программу, которая покажет количество чётных чисел в массиве.
+/*///Задайте массив заполненный случайными положительными трёхзначными числами. Напишите программу, которая покажет количество чётных чисел в массиве.
 //[345, 897, 568, 234] -> 2
 
 using static System.Console;
@@ -299,4 +299,54 @@ void  CountEvenElements(int[] array)
 (int number, int minValues, int maxValues) parametersWork=ParametersRandomArray();
 int[] massiv=FillArrayRamdom(parametersWork.number, parametersWork.minValues, parametersWork.maxValues);
 PrintArray(massiv);
-CountEvenElements(massiv);
+CountEvenElements(massiv);*/
+
+//Задайте одномерный массив, заполненный случайными числами. Найдите сумму элементов, стоящих на нечётных позициях.
+//[3, 7, 23, 12] -> 19
+//[-4, -6, 89, 6] -> 0
+
+using static System.Console;
+Clear();
+
+(int number, int minValues, int maxValues) ParametersRandomArray()
+{
+    (int number, int minValues, int maxValues) parameters;
+    Write(" Введите размер массива  ");
+    parameters.number=Convert.ToInt32(ReadLine());
+    Write(" Введите минимальное Значение ");
+    parameters.minValues=Convert.ToInt32(ReadLine());
+    Write(" Введите максимальное Значение ");
+    parameters.maxValues=Convert.ToInt32(ReadLine());
+    return parameters;
+}
+
+int [] FillArrayRamdom(int number, int minValues, int maxValues)
+{
+    int[] array=new int[number];
+    for(int i=0; i<array.Length; i++)
+        array[i]=new Random().Next(minValues,maxValues+1);
+    return array;
+}
+
+void PrintArray(int[] array)
+{
+  WriteLine(String.Join(" ", array));  
+}
+
+int  SumOddElementss(int[] array)
+{
+    int summ=0;
+    for(int i=0; i<array.Length; i=i+2)
+    {
+        summ+=array[i];
+        
+    }
+    return summ;
+    //WriteLine($" Количество элементов имеющих четное значение -> {count}");
+}
+
+(int number, int minValues, int maxValues) parametersWork=ParametersRandomArray();
+int[] massiv=FillArrayRamdom(parametersWork.number, parametersWork.minValues, parametersWork.maxValues);
+PrintArray(massiv);
+int sumWork=SumOddElementss(massiv);
+WriteLine($" Сумма значений нечетных элементов массива - > {sumWork}");
