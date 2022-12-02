@@ -301,7 +301,7 @@ int[] massiv=FillArrayRamdom(parametersWork.number, parametersWork.minValues, pa
 PrintArray(massiv);
 CountEvenElements(massiv);*/
 
-//Задайте одномерный массив, заполненный случайными числами. Найдите сумму элементов, стоящих на нечётных позициях.
+/*//Задайте одномерный массив, заполненный случайными числами. Найдите сумму элементов, стоящих на нечётных позициях.
 //[3, 7, 23, 12] -> 19
 //[-4, -6, 89, 6] -> 0
 
@@ -339,14 +339,72 @@ int  SumOddElementss(int[] array)
     for(int i=0; i<array.Length; i=i+2)
     {
         summ+=array[i];
-        
     }
     return summ;
-    //WriteLine($" Количество элементов имеющих четное значение -> {count}");
 }
 
 (int number, int minValues, int maxValues) parametersWork=ParametersRandomArray();
 int[] massiv=FillArrayRamdom(parametersWork.number, parametersWork.minValues, parametersWork.maxValues);
 PrintArray(massiv);
 int sumWork=SumOddElementss(massiv);
-WriteLine($" Сумма значений нечетных элементов массива - > {sumWork}");
+WriteLine($" Сумма значений нечетных элементов массива - > {sumWork}");*/
+
+//Задача 38: Задайте массив вещественных чисел. Найдите разницу между максимальным и минимальным элементов массива.
+//[3 7 22 2 78] -> 76
+
+using static System.Console;
+Clear();
+
+(int number, int minValues, int maxValues) ParametersRandomArray()
+{
+    (int number, int minValues, int maxValues) parameters;
+    Write(" Введите размер массива  ");
+    parameters.number=Convert.ToInt32(ReadLine());
+    Write(" Введите минимальное Значение (вещественное число) ");
+    parameters.minValues=Convert.ToInt32(ReadLine());
+    Write(" Введите максимальное Значение (вещественное число) ");
+    parameters.maxValues=Convert.ToInt32(ReadLine());
+    return parameters;
+}
+
+int [] FillArrayRamdom(int number, int minValues, int maxValues)
+{
+    int[] array=new int[number];
+    for(int i=0; i<array.Length; i++)
+        array[i]=new Random().Next(minValues,maxValues+1);
+    return array;
+}
+
+void PrintArray(int[] array)
+{
+  WriteLine(String.Join(" ", array));  
+}
+
+int  MaximumDistance(int[] array)
+{
+    int minElement=array[0];
+    int maxElement=array[0];
+    int summ=-1;
+
+    if(array.Length<2)
+        return summ;
+
+    for(int i=1; i<array.Length; i++)
+    {
+        if(array[i]<minElement)
+            minElement=array[i];
+        if(array[i]>=maxElement)
+            maxElement=array[i];
+    }
+    summ=maxElement-minElement;
+    return summ;
+}
+
+(int number, int minValues, int maxValues) parametersWork=ParametersRandomArray();
+int[] massiv=FillArrayRamdom(parametersWork.number, parametersWork.minValues, parametersWork.maxValues);
+PrintArray(massiv);
+int sumWork=MaximumDistance(massiv);
+if(sumWork==-1)
+    WriteLine(" Ошибка, Количество элементов массива должно быть два и более");
+else 
+    WriteLine($" Максимальное расстояние между элементами -> {sumWork}");
