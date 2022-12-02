@@ -355,36 +355,40 @@ WriteLine($" Сумма значений нечетных элементов м�
 using static System.Console;
 Clear();
 
-(int number, int minValues, int maxValues) ParametersRandomArray()
+( int number, int minValue, int maxValues) ParametersRandomArray()
 {
     (int number, int minValues, int maxValues) parameters;
-    Write(" Введите размер массива  ");
+    Write(" Введите размер вещественного массива  ");
     parameters.number=Convert.ToInt32(ReadLine());
-    Write(" Введите минимальное Значение (вещественное число) ");
+    Write(" Введите минимальное Значение ");
     parameters.minValues=Convert.ToInt32(ReadLine());
-    Write(" Введите максимальное Значение (вещественное число) ");
+    Write(" Введите максимальное Значение  ");
     parameters.maxValues=Convert.ToInt32(ReadLine());
     return parameters;
 }
 
-int [] FillArrayRamdom(int number, int minValues, int maxValues)
+double [] FillArrayRamdom(int number, int minValues, int maxValues)
 {
-    int[] array=new int[number];
+    double[] array=new double[number];
     for(int i=0; i<array.Length; i++)
-        array[i]=new Random().Next(minValues,maxValues+1);
+        array[i]=new Random().NextDouble()* new Random().Next(minValues,maxValues+1);
+        
     return array;
 }
 
-void PrintArray(int[] array)
+void PrintArray(double[] array)
 {
-  WriteLine(String.Join(" ", array));  
+    Write("Массив ");
+    for(int i=0; i<array.Length; i++)
+        Write($" {array[i]:f} "); 
+        WriteLine();
 }
 
-int  MaximumDistance(int[] array)
+double  MaximumDistance(double[] array)
 {
-    int minElement=array[0];
-    int maxElement=array[0];
-    int summ=-1;
+    double minElement=array[0];
+    double maxElement=array[0];
+    double summ=-1;
 
     if(array.Length<2)
         return summ;
@@ -401,10 +405,10 @@ int  MaximumDistance(int[] array)
 }
 
 (int number, int minValues, int maxValues) parametersWork=ParametersRandomArray();
-int[] massiv=FillArrayRamdom(parametersWork.number, parametersWork.minValues, parametersWork.maxValues);
+double[] massiv=FillArrayRamdom(parametersWork.number, parametersWork.minValues, parametersWork.maxValues);
 PrintArray(massiv);
-int sumWork=MaximumDistance(massiv);
+double sumWork=MaximumDistance(massiv);
 if(sumWork==-1)
     WriteLine(" Ошибка, Количество элементов массива должно быть два и более");
 else 
-    WriteLine($" Максимальное расстояние между элементами -> {sumWork}");
+    WriteLine($" Максимальное расстояние между элементами -> {sumWork:f}");
