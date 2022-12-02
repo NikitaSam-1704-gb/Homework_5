@@ -195,7 +195,7 @@ int chislo=CountElementsInterval(massiv, 10, 99);
 WriteLine($" Число элементов массива в интервале [10,99] равно {chislo}");*/
 
 
-//Найдите произведение пар чисел в одномерном массиве. 
+/*//Найдите произведение пар чисел в одномерном массиве. 
 //Парой считаем первый и последний элемент, второй и предпоследний и т.д. Результат запишите в новом массиве.
 //[1 2 3 4 5] -> 5 8 3
 //[6 7 3 6] -> 36 21
@@ -251,6 +251,52 @@ int [] task37(int[] array)
 int[] massiv=FillArrayRamdom(parametersWork.number, parametersWork.minValues, parametersWork.maxValues);
 PrintArray(massiv);
 int[] sumMassiv=task37(massiv);
-PrintArray(sumMassiv);
+PrintArray(sumMassiv);*/
 
 
+///Задайте массив заполненный случайными положительными трёхзначными числами. Напишите программу, которая покажет количество чётных чисел в массиве.
+//[345, 897, 568, 234] -> 2
+
+using static System.Console;
+Clear();
+
+(int number, int minValues, int maxValues) ParametersRandomArray()
+{
+    (int number, int minValues, int maxValues) parameters;
+    Write(" Введите размер массива  ");
+    parameters.number=Convert.ToInt32(ReadLine());
+    Write(" Введите минимальное Значение ");
+    parameters.minValues=Convert.ToInt32(ReadLine());
+    Write(" Введите максимальное Значение ");
+    parameters.maxValues=Convert.ToInt32(ReadLine());
+    return parameters;
+}
+
+int [] FillArrayRamdom(int number, int minValues, int maxValues)
+{
+    int[] array=new int[number];
+    for(int i=0; i<array.Length; i++)
+        array[i]=new Random().Next(minValues,maxValues+1);
+    return array;
+}
+
+void PrintArray(int[] array)
+{
+  WriteLine(String.Join(" ", array));  
+}
+
+void  CountEvenElements(int[] array)
+{
+    int count=0;
+    for(int i=0; i<array.Length; i++)
+    {
+        if(array[i]%2==0)
+            count++;
+    }
+    WriteLine($" Количество элементов имеющих четное значение -> {count}");
+}
+
+(int number, int minValues, int maxValues) parametersWork=ParametersRandomArray();
+int[] massiv=FillArrayRamdom(parametersWork.number, parametersWork.minValues, parametersWork.maxValues);
+PrintArray(massiv);
+CountEvenElements(massiv);
